@@ -1,5 +1,12 @@
 %!
 
+/randmax 2 31 exp def
+110 srand
+
+/rrd {rand randmax div} def
+/rmul {rrd mul} def
+/srmul {rrd 2 mul 1 sub mul} def
+
 /inch {72 mul} def
 /unit {5 inch 6 div mul} def
 /centershow {
@@ -35,8 +42,12 @@
     } {
 	w 1 eq { 
 	    1 .5 .5 setrgbcolor
-	}{
-	    .7 .4 1 setrgbcolor
+	} {
+	    w 2 eq {
+		.7 .4 1 setrgbcolor
+	    } {
+		.7 .7 .7 setrgbcolor
+	    } ifelse
 	} ifelse
     } ifelse    
 } def
@@ -52,14 +63,31 @@
 	    newpath
 	    -.5 unit -.25 unit moveto
 	    20 {
-		0 1.5 unit rlineto
-		1 20 div unit -1.5 unit rmoveto
+		0 2 unit rlineto
+		1 20 div unit -2 unit rmoveto
 	    } repeat
 	    stroke
 	    grestore
 	    stroke
 	} {
-	    fill
+	    x 2 eq {
+		fill
+	    } {
+		gsave
+		clip
+		newpath
+		0 .83 unit translate
+		3 srand
+		20000 {
+		    /rx 2 unit srmul def
+		    /ry 2 unit srmul def
+		    rx ry moveto
+		    rx ry currentlinewidth 0 360 arc
+		} repeat
+		fill
+		grestore
+		stroke
+	    } ifelse
 	} ifelse
     } ifelse
 } def
@@ -86,6 +114,11 @@
     .2 unit 0 lineto
 } def
 
+/none {
+    .15 unit 0 moveto
+    0 0 .15 unit 0 360 arc
+} def
+
 %draws the correct icon based on y
 /drawicon {
     y 0 eq {
@@ -94,7 +127,11 @@
 	y 1 eq {
 	    place
 	} {
-	    thing
+	    y 2 eq {
+		thing
+	    } {
+		none
+	    } ifelse
 	} ifelse
     } ifelse
 } def
@@ -107,11 +144,21 @@
     seticoncolor
 
     newpath
-    0 z 6 div unit translate
-    z 1 add {
+    z 0 ge z 2 le and {
+	0 z 6 div unit translate
+	z 1 add {
+	    drawicon
+	    0 -1 3 div unit translate
+	} repeat
+    } {
+	1 6 div unit dup translate
+	%.75 dup scale
+	0 0 moveto
 	drawicon
-	0 -1 3 div unit translate
-    } repeat
+	-1 3 div unit dup translate
+	0 0 moveto
+	drawicon
+    } ifelse
     drawiconpath
     grestore
 } def
@@ -200,6 +247,8 @@
     (Detritus)
 ] def
 
+
+
 .5 inch 10.5 inch translate
 newpath
 0 0 moveto
@@ -243,6 +292,7 @@ clip
 grestore
 stroke
 /Helvetica-Bold 10 selectfont
+%draw all the cards in a single page.
 0 1 2 {
     /w exch def
     0 1 2 {
@@ -261,7 +311,69 @@ stroke
 } for
 
 
+/w 3 def
+/x 3 def
+/y 3 def
+/z 3 def
 0 -9.25 unit moveto
+/meanings [
+    (New)
+    (Present)
+    (Old)
+] def
+.5 unit -.5 unit rmoveto
+0 1 2 {
+    /w exch def
+    icon
+    meanings w get tiltshow
+    1 unit 0 rmoveto
+} for
+/w 3 def
+3 unit -9.25 unit moveto
+/meanings [
+    (Home)
+    (Community)
+    (World)
+] def
+.5 unit -.5 unit rmoveto
+0 1 2 {
+    /x exch def
+    icon
+    meanings x get tiltshow
+    1 unit 0 rmoveto
+} for
+/x 3 def
+0 -10.25 unit moveto
+/meanings [
+    (Beings)
+    (Places)
+    (Things)
+] def
+.5 unit -.5 unit rmoveto
+0 1 2 {
+    /y exch def
+    icon
+    meanings y get tiltshow
+    1 unit 0 rmoveto
+} for
+/y 3 def
+3 unit -10.25 unit moveto
+/meanings [
+    (Few/None)
+    (Some)
+    (Many)
+] def
+.5 unit -.5 unit rmoveto
+0 1 2 {
+    /z exch def
+    icon
+    meanings z get tiltshow
+    1 unit 0 rmoveto
+} for
+/z 3 def
+
+0 {
+6 unit -9.25 unit moveto
 /line {dup show stringwidth pop -1 mul -12 rmoveto} def
 (1: Few/None) line
 (2: Some) line
@@ -275,3 +387,6 @@ stroke
 (G: New) line
 (R: Present) line
 (P: Old) line
+} repeat
+
+showpage
