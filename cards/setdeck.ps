@@ -1,0 +1,277 @@
+%!
+
+/inch {72 mul} def
+/unit {5 inch 6 div mul} def
+/centershow {
+    /text exch def
+    gsave
+	text stringwidth pop -2 div 0 rmoveto
+	text show
+    grestore
+} def
+/tiltshow {
+    /text exch def
+    gsave
+	currentpoint translate
+	30 rotate
+	text stringwidth pop -2 div 0 moveto
+	gsave
+	1 setgray
+	gsave
+	0 -.5 rmoveto
+	text show
+	grestore
+	.5 0 rmoveto
+	text show
+	grestore
+	text show
+    grestore
+} def
+
+% sets the icon color based on w
+/seticoncolor {
+    w 0 eq {
+	.4 1 .4 setrgbcolor
+    } {
+	w 1 eq { 
+	    1 .5 .5 setrgbcolor
+	}{
+	    .7 .4 1 setrgbcolor
+	} ifelse
+    } ifelse    
+} def
+
+% draws the current path based on x
+/drawiconpath {
+    x 0 eq {
+	stroke
+    } {
+	x 1 eq {
+	    gsave
+	    clip
+	    newpath
+	    -.5 unit -.25 unit moveto
+	    20 {
+		0 1.5 unit rlineto
+		1 20 div unit -1.5 unit rmoveto
+	    } repeat
+	    stroke
+	    grestore
+	    stroke
+	} {
+	    fill
+	} ifelse
+    } ifelse
+} def
+
+/being {
+    .2 unit 0 moveto
+    0 0 -.1 unit .3 unit -.2 unit 0 curveto
+    0 0 .1 unit -.3 unit .2 unit 0 curveto
+} def
+
+/place {
+    .2 unit 0 moveto
+    .1 unit 0 .1 unit 0 90 arc
+    -.1 unit 0 .1 unit 90 270 arc
+    .1 unit 0 .1 unit 270 360 arc
+
+} def
+
+/thing {
+    .2 unit 0 moveto
+    0 .1 unit lineto
+    -.2 unit 0 lineto
+    0 -.1 unit lineto
+    .2 unit 0 lineto
+} def
+
+%draws the correct icon based on y
+/drawicon {
+    y 0 eq {
+	being
+    } {
+	y 1 eq {
+	    place
+	} {
+	    thing
+	} ifelse
+    } ifelse
+} def
+
+%draws the icon the correct number of times based on z
+%calls the other variables
+/icon {
+    gsave
+    currentpoint translate
+    seticoncolor
+
+    newpath
+    0 z 6 div unit translate
+    z 1 add {
+	drawicon
+	0 -1 3 div unit translate
+    } repeat
+    drawiconpath
+    grestore
+} def
+
+/titles [
+    (Childless)
+    (Children)
+    (Visitors)
+    (Settled?)
+    (Renovation)
+    (House-buying)
+    (Shelter-in-place)
+    (Buying)
+    (Shopping Spree)
+    (Dateless)
+    (Introductions)
+    (Orientation)
+    (Hemmed In)
+    (Settlement)
+    (Annexation)
+    (Drought)
+    (Crop)
+    (Glut)
+    (Low Fertility?)
+    (Repopulation)
+    (Baby Boom)
+    (Isolationism)
+    (Expansion)
+    (Colonization)
+    (Handcrafting)
+    (Production)
+    (Manufacturing)
+    (Single)
+    (Household)
+    (Gathering)
+    (Tent)
+    (House)
+    (Estate)
+    (Poverty)
+    (Contentment)
+    (Wealth)
+    (Lonely)
+    (Friends)
+    (Crowd)
+    (Refugees)
+    (Village)
+    (City)
+    (Scarcity)
+    (Supplies)
+    (Surplus)
+    (Uninhabited)
+    (Populated)
+    (Teeming)
+    (Nonstate)
+    (Country)
+    (Empire)
+    (Wilderness)
+    (Goods)
+    (Plastic)
+    (Foundling)
+    (Parents)
+    (Ancestry)
+    (Evacuated)
+    (Ancestral Home)
+    (Hereditary Seat)
+    (Flooding)
+    (Heirlooms)
+    (Hoarding)
+    (Sole Survivor)
+    (Elders)
+    (Senate)
+    (Emigration)
+    (Shrine)
+    (Archeological Dig)
+    (Scrap)
+    (Stockpile)
+    (Landfill)
+    (Thylacine)
+    (Redwoods)
+    (Sharks)
+    (Eradication)
+    (Heritage)
+    (Post-Empire)
+    (Phaistos?)
+    (Artifacts)
+    (Detritus)
+] def
+
+.5 inch 10.5 inch translate
+newpath
+0 0 moveto
+9 unit 0 lineto
+9 unit -9 unit lineto
+0 -9 unit lineto
+closepath
+gsave
+clip
+4 {
+    gsave
+    4 {
+	newpath
+	-.25 unit 0 moveto
+	.25 unit 0 lineto
+	0 -.25 unit moveto
+	0 .25 unit lineto
+	stroke
+	3 unit 0 translate
+    } repeat
+    grestore
+    0 -3 unit translate
+} repeat
+grestore
+gsave
+clip
+10 {
+    gsave
+    10 {
+	newpath
+	-.1 unit 0 moveto
+	.1 unit 0 lineto
+	0 -.1 unit moveto
+	0 .1 unit lineto
+	stroke
+	1 unit 0 translate
+    } repeat
+    grestore
+    0 -1 unit translate
+} repeat
+grestore
+stroke
+/Helvetica-Bold 10 selectfont
+0 1 2 {
+    /w exch def
+    0 1 2 {
+	/x exch def
+	0 1 2 {
+	    /y exch def
+	    0 1 2 {
+		/z exch def
+		w 3 mul y add unit x -3 mul z sub unit moveto
+		.5 unit -.5 unit rmoveto
+		icon
+		titles 0 w add 3 mul x add 3 mul y add 3 mul z add get tiltshow 
+	    } for
+	} for
+    } for
+} for
+
+
+0 -9.25 unit moveto
+/line {dup show stringwidth pop -1 mul -12 rmoveto} def
+(1: Few/None) line
+(2: Some) line
+(3: Many) line
+(S: Beings) line
+(O: Places) line
+(D: Things) line
+(E: Home) line
+(S: Community) line
+(F: World) line
+(G: New) line
+(R: Present) line
+(P: Old) line
