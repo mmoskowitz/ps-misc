@@ -1,0 +1,567 @@
+%!
+
+/inch {72 mul} def
+
+/gridside 20 def
+
+/red {
+    1 0 0 setrgbcolor
+} def
+
+/orange {
+    1 0.5 0 setrgbcolor
+} def
+
+/yellow {
+    0 0 1 0 setcmykcolor
+} def
+
+/green {
+    0 0.66 0.2 setrgbcolor
+} def
+
+/blue {
+    0.163 0.373 0.6 setrgbcolor
+} def
+
+/purple {
+    0.5 0 0.5 setrgbcolor
+} def
+
+/magenta {
+    0 1 0 0 setcmykcolor
+} def
+
+/cyan {
+    1 0 0 0 setcmykcolor
+} def
+
+/green2 {
+    1 0 1 0 setcmykcolor
+} def
+
+/violet {
+    1 1 0 0 setcmykcolor
+} def
+
+/black {
+    0 0 0 1 setcmykcolor
+} def
+
+/white {
+    0 0 0 0 setcmykcolor
+} def
+
+/spotrad gridside 2.2 div def
+
+/spot {
+    gsave
+    currentpoint translate
+    newpath
+    0 0 spotrad 0 360 arc
+    gsave
+    black stroke
+    grestore
+    fill
+    grestore
+} def
+
+/symbolbase 30 def
+
+/symbolscale {
+    gridside 30 div dup scale
+} def
+
+
+/sun {
+    gsave
+    currentpoint translate
+    symbolscale
+    1 5 div dup scale
+    7 setlinewidth
+    newpath
+    0 0 50 0 360 arc
+    stroke
+    newpath
+    0 0 7 0 360 arc
+    fill
+    grestore
+} def
+
+/moon {
+    /angle 2 5 sqrt atan def
+    gsave
+    currentpoint translate
+    symbolscale
+    6.25 0 translate
+    180 rotate
+    1 5 div dup scale
+    7 setlinewidth
+    newpath
+    0 0 50 -90 90 arc
+    -25 5 sqrt mul 0 75 angle angle -1 mul arcn
+    stroke
+    grestore
+} def
+
+/mercury {
+    gsave
+    currentpoint translate
+    symbolscale
+    1 5 div dup scale
+    7 setlinewidth
+    newpath
+    25 75 moveto
+    0 75 25 0 -90 arcn
+    0 25 25 90 450 arc
+    0 75 25 270 180 arcn
+    0 0 moveto
+    0 -50 lineto
+    25 -25 moveto
+    -25 -25 lineto
+    stroke
+    grestore    
+} def
+
+/venus {
+    gsave
+    currentpoint translate
+    symbolscale
+    1 5 div dup scale
+    7 setlinewidth
+    newpath
+    0 0 moveto
+    0 25 25 -90 270 arc
+    0 -50 lineto
+    25 -25 moveto
+    -25 -25 lineto
+    stroke
+    grestore    
+} def
+
+/mars {
+    gsave
+    currentpoint translate
+    symbolscale
+    1 5 div dup scale
+    7 setlinewidth
+    newpath
+    -12.5 -12.5 25 45 405 arc
+    37.5 dup lineto
+    -25 0 rmoveto
+    25 0 rlineto
+    0 -25 rlineto
+    stroke
+    grestore    
+} def
+
+/jove {
+    gsave
+    currentpoint translate
+    symbolscale
+    0 3.125 translate
+    1 5 div dup scale
+    7 setlinewidth
+    newpath
+    -12.5 12.5 25 180 -45 arcn
+    -37.5 dup rlineto
+    100 0 rlineto
+    -37.5 -25 rmoveto
+    0 100 rlineto
+    stroke
+    grestore    
+} def
+
+/saturn {
+    gsave
+    currentpoint translate
+    symbolscale
+    3.125 0 translate
+    1 5 div dup scale
+    7 setlinewidth
+    newpath
+    0 37.5 moveto
+    -50 0 rlineto
+    25 25 rmoveto
+    0 -62.5 rlineto
+    0 0 25 180 -45 arcn
+    25 2 sqrt mul 1.5 mul dup -1 mul 50 135 180 arc
+    0 -12.5 rlineto
+    stroke
+    grestore    
+} def
+
+/colors [
+    {cyan}
+    {violet}
+    {magenta}
+    {red}
+    {yellow}
+    {green2}
+    {white}
+] def
+
+/dot {
+    /colornum exch def
+    colors colornum get exec
+    spot
+} def
+
+/symbols [
+    {sun}
+    {moon}
+    {mars}
+    {mercury}
+    {jove}
+    {venus}
+    {saturn}
+] def
+
+
+/symbol {
+    /symnum exch def
+    gsave
+    black
+    symbols symnum get exec
+    grestore
+} def
+
+/tostring {
+    /tsdata exch def
+    tsdata 0 eq {
+	(0)
+    } {
+	tsdata cvi tsdata ne
+	tsdata 4 mul tsdata 4 mul cvi eq and { %1/4, 1/2, 3/4
+	    /tsrem tsdata 4 mul cvi 4 mod def
+	    /tsival tsdata cvi tostring def
+	    /ts4val tsival length 1 add string def
+	    ts4val 0 tsival putinterval
+	    ts4val tsival length 187 tsrem add put
+	    ts4val
+	} {
+	    tsdata 1000 ge {
+		tsdata 1000 mod
+		tsdata 1000 div cvi
+		/tstop exch tostring def
+		/tsbottom exch tostring padnumstring def
+		/tskval tstop length 4 add string def
+		tskval 0 tstop putinterval
+		tskval tstop length (,) putinterval
+		tskval tstop length 1 add tsbottom putinterval
+		tskval
+	    }{
+		/tsval 4 string def %basic case
+		tsdata tsval cvs
+	    } ifelse
+	} ifelse
+    } ifelse
+} def
+
+/padnumstring {
+    /numstring exch def
+    /pnsval 2 string def
+    pnsval 0 (00) putinterval
+    pnsval 2 numstring length sub numstring putinterval
+    pnsval
+} def
+
+/leading {
+    0 gridside -5 div rmoveto
+} def
+
+/centershow {
+    /text exch def
+    gsave
+	text stringwidth pop -2 div 0 rmoveto
+	leading
+	text show
+    grestore
+} def
+
+/numshow {
+    tostring padnumstring centershow
+} def
+
+/numboldshow {
+    /num exch def
+    gsave
+    .75 setgray
+    spot
+    grestore
+    num numshow
+} def
+
+/monthshow {
+    /mtext exch def
+    gsave
+    currentpoint translate
+    monthsize stdfont
+    /mwidth mtext stringwidth pop def
+    mwidth -1 mul 0 moveto
+    leading
+    mtext show
+    grestore
+} def
+
+/stdfont {
+    /size exch def
+    /Futura-Medium  findfont size scalefont setfont
+} def
+
+/boldfont {
+    /size exch def
+    /Futura-Italic  findfont size scalefont setfont
+} def
+
+/newrow {
+    /row row 1 add def
+    /col 0 def
+} def
+
+/nextcell {
+    /col col 1 add def
+    col 6 gt {
+	newrow
+    } if
+} def
+
+/nextrow {
+    /row row 1 add def
+    row 3 gt {
+	/col col 1 add def
+	/row 0 def
+    } if
+} def
+
+/resetcell {
+    /row 0 def
+    /col 0 def
+} def
+
+/movetocell {
+    gridside col mul gridside row -1 mul mul moveto
+} def
+
+.5 inch 10.5 inch translate
+
+%years
+gsave
+ gridside 3 mul 0 translate
+ gsave
+  gridside -0.5 mul dup -1 mul translate
+  .5 setlinewidth
+  newpath
+  resetcell
+  0 {
+      movetocell
+      /col col 1 add def
+      0 gridside -22 mul rlineto
+  } repeat
+  stroke
+ grestore
+
+ resetcell
+ 0 1 99 {
+     /year exch def
+     movetocell
+     12 stdfont
+     year 4 mod 0 eq {
+	 year 0 eq {
+	     gsave
+	      .75 setgray
+	      newpath
+	      0 0 spotrad -135 45 arc
+	      fill
+	      0 setgray
+	      newpath
+	      0 0 spotrad 0 360 arc
+	      stroke
+	     grestore
+	     year numshow
+	 } {
+	     year numboldshow
+	 } ifelse
+     } {
+	 year numshow
+     } ifelse
+     year 4 mod 3 eq {
+	 nextcell
+     } if
+     nextcell
+ } for
+grestore
+
+
+%centuries
+gsave
+/col 0 def
+
+ /row 18 def
+ movetocell
+ currentpoint translate
+ gsave
+  gridside -0.5 mul dup -1 mul translate
+  .5 setlinewidth
+  newpath
+  resetcell
+  0 {
+      movetocell
+      /row row 1 add def
+      gridside 10 mul 0 rlineto
+  } repeat
+  stroke
+  grestore
+ resetcell
+ 16 1 27 {
+     /century exch def
+     movetocell
+     12 stdfont
+     century 4 mod 0 eq {
+	 gsave
+	 currentpoint translate
+	  .75 setgray
+	  newpath
+	  0 0 spotrad -135 45 arcn
+	  fill
+	  0 setgray
+	  newpath
+	  0 0 spotrad 0 360 arc
+	  stroke
+         grestore
+	 century numshow
+     } {
+	 century numshow
+     } ifelse
+     nextrow
+     
+ } for
+ %year type markers
+ gsave
+  movetocell
+  currentpoint translate
+  resetcell
+  /color 0 def
+  0 1 3 {
+      0 1 6 {
+	  movetocell
+	  color dot
+	  /color color 1 add 7 mod def
+	  nextcell
+      } for
+      /color color 5 add 7 mod def
+  } for
+ grestore
+grestore
+
+%days
+gsave
+ /col 3 def
+ /row 23 def
+ movetocell
+ currentpoint translate
+ resetcell
+ 0 1 6 {
+     movetocell
+     dot
+     nextcell
+ } for
+ 0 1 48 {
+     /day exch def
+     movetocell
+     day row sub 8 add 7 mod symbol
+     nextcell
+ } for
+grestore
+
+%months
+/monthsize 11 def
+gsave
+ /col 2.5 def
+ /row 24 def
+ movetocell
+ currentpoint translate
+ resetcell
+ (jan okt ) monthshow
+ newrow
+ movetocell
+ gsave
+  monthsize stdfont
+  (jan apr jul ) stringwidth pop -1 mul 0 rmoveto
+  (jan) stringwidth pop 2 div 0 rmoveto
+  .75 setgray
+  spot
+ grestore
+ (jan apr jul ) monthshow
+ newrow
+ movetocell
+ (sep dec ) monthshow
+ newrow
+ movetocell
+ (jun ) monthshow
+ newrow
+ movetocell
+ (feb mar nov ) monthshow
+ newrow
+ movetocell
+ gsave
+  monthsize stdfont
+  (feb aug ) stringwidth pop -1 mul 0 rmoveto
+  (feb) stringwidth pop 2 div 0 rmoveto
+  .75 setgray
+  spot
+ grestore
+ (feb aug ) monthshow
+ newrow
+ movetocell
+ (maj ) monthshow
+ newrow
+grestore
+ 
+{
+0 0 moveto
+red
+spot
+10 0 rmoveto
+orange
+spot
+10 0 rmoveto
+yellow
+spot
+10 0 rmoveto
+green
+spot
+10 0 rmoveto
+blue
+spot
+10 0 rmoveto
+purple
+spot
+10 0 rmoveto
+black
+spot
+15 -30 moveto
+0 symbol
+30 0 rmoveto
+1 symbol
+30 0 rmoveto
+2 symbol
+30 0 rmoveto
+3 symbol
+30 0 rmoveto
+4 symbol
+30 0 rmoveto
+5 symbol
+30 0 rmoveto
+6 symbol
+newpath
+0 -30 moveto
+8 {
+    0 10 rlineto
+    30 -10 rmoveto
+} repeat
+stroke
+} pop
+
+
+showpage
