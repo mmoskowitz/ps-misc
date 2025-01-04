@@ -109,6 +109,7 @@
     currentpoint translate
     symbolscale
     1 5 div dup scale
+    0 -15 translate
     7 setlinewidth
     newpath
     25 75 moveto
@@ -163,7 +164,7 @@
     1 5 div dup scale
     7 setlinewidth
     newpath
-    -12.5 12.5 25 180 -45 arcn
+    -13 12 20 180 -45 arcn
     -37.5 dup rlineto
     100 0 rlineto
     -37.5 -25 rmoveto
@@ -304,9 +305,29 @@
     grestore
 } def
 
+%re-encode fonts:begin
+
+/Futura-Medium findfont 
+dup length dict begin
+  { 1 index /FID ne
+      {def}
+      {pop pop}
+    ifelse
+  } forall
+  /Encoding ISOLatin1Encoding length array def
+  ISOLatin1Encoding Encoding copy
+  currentdict
+end
+/Futura-ISOLatin1 exch definefont pop
+
+/Font-Standard /Futura-Medium def
+%re-encode fonts:end
+
+
+
 /stdfont {
     /size exch def
-    /Futura-Medium  findfont size scalefont setfont
+    /Futura-ISOLatin1  findfont size scalefont setfont
 } def
 
 /boldfont {
@@ -343,11 +364,22 @@
     gridside col mul gridside row -1 mul mul moveto
 } def
 
-.5 inch 10.5 inch translate
+.5 inch 10.75 inch translate
+
+%title
+gsave
+0 gridside -2 mul translate
+24 stdfont
+gridside 7 5 add mul  2 div 0 moveto
+(dumiljara kalendar\047) centershow
+
+grestore
+
+0 gridside -3 mul translate
 
 %years
 gsave
- gridside 3 mul 0 translate
+ gridside 5 mul 0 translate
  gsave
   gridside -0.5 mul dup -1 mul translate
   .5 setlinewidth
@@ -413,7 +445,7 @@ gsave
   stroke
   grestore
  resetcell
- 16 1 27 {
+ 16 1 35 {
      /century exch def
      movetocell
      12 stdfont
@@ -454,9 +486,55 @@ gsave
  grestore
 grestore
 
+gsave %titles
+ 12 stdfont
+ /col 4 def
+ /row 8 def
+ movetocell
+ gsave
+ currentpoint translate
+ 90 rotate
+ 0 0 moveto
+ (jar\047) centershow
+ grestore
+ /col 2 def
+ /row 17 def
+ movetocell
+ (centjar\047) centershow
+ /col 8 def
+ /row 22 def
+ movetocell
+ (jarcolor\047) centershow
+ /col .75 def
+ /row 27 def
+ movetocell
+ gsave
+ currentpoint translate
+ 90 rotate
+ 0 0 moveto
+ (monat\047) centershow
+ grestore
+ /col 8 def
+ /row 31 def
+ movetocell
+ (unua semajntag\047) centershow
+ /col 6 def
+ /row 33 def
+ movetocell
+ 6 stdfont
+ /smallprint (dezajno de Marc Moskowitz, algoritmo kaj arango desegnita de KT) def
+ smallprint centershow
+ movetocell
+ smallprint stringwidth pop 2 div 0 rmoveto
+ (go desegnita de KT) stringwidth pop -1 mul 0 rmoveto
+ leading
+ (\223) show
+ 
+grestore
+
 %days
 gsave
- /col 3 def
+ /col 5 def
  /row 23 def
  movetocell
  currentpoint translate
@@ -477,7 +555,7 @@ grestore
 %months
 /monthsize 11 def
 gsave
- /col 2.5 def
+ /col 4.5 def
  /row 24 def
  movetocell
  currentpoint translate
@@ -512,56 +590,17 @@ gsave
   spot
  grestore
  (feb aug ) monthshow
+ gsave
+ movetocell
+ monthsize stdfont
+ (ug ) stringwidth pop -1 mul 0 rmoveto
+ leading
+ (\226) show
+ grestore
  newrow
  movetocell
  (maj ) monthshow
  newrow
 grestore
- 
-{
-0 0 moveto
-red
-spot
-10 0 rmoveto
-orange
-spot
-10 0 rmoveto
-yellow
-spot
-10 0 rmoveto
-green
-spot
-10 0 rmoveto
-blue
-spot
-10 0 rmoveto
-purple
-spot
-10 0 rmoveto
-black
-spot
-15 -30 moveto
-0 symbol
-30 0 rmoveto
-1 symbol
-30 0 rmoveto
-2 symbol
-30 0 rmoveto
-3 symbol
-30 0 rmoveto
-4 symbol
-30 0 rmoveto
-5 symbol
-30 0 rmoveto
-6 symbol
-newpath
-0 -30 moveto
-8 {
-    0 10 rlineto
-    30 -10 rmoveto
-} repeat
-stroke
-} pop
-
 
 showpage
