@@ -202,10 +202,45 @@
     {white}
 ] def
 
+/colornames [
+    (cej)
+    (blu)
+    (ma\201)
+    (ru\201)
+    (fla)
+    (ver)
+    (bla)
+] def
+
+/colornamegrays [
+    1
+    1
+    1
+    1
+    0
+    1
+    0
+] def
+
+/colorsize 9 def
+
+/colorshow {
+    /text exch def
+    gsave
+    colorsize stdfont
+    text centershow
+    grestore
+} def
+
 /dot {
     /colornum exch def
     colors colornum get exec
     spot
+    gsave
+    colornamegrays colornum get setgray
+    3 argleading
+    colornames colornum get colorshow
+    grestore    
 } def
 
 /symbols [
@@ -271,17 +306,21 @@
     0 gridside -5 div rmoveto
 } def
 
+/argleading {
+    0 exch -1 mul rmoveto
+} def
+
 /centershow {
     /text exch def
-    gsave
-	text stringwidth pop -2 div 0 rmoveto
-	leading
-	text show
-    grestore
+    text stringwidth pop -2 div 0 rmoveto
+    text show
 } def
 
 /numshow {
-    tostring padnumstring centershow
+    gsave
+      4 argleading
+      tostring padnumstring centershow
+    grestore
 } def
 
 /numboldshow {
@@ -316,6 +355,8 @@ dup length dict begin
   } forall
   /Encoding ISOLatin1Encoding length array def
   ISOLatin1Encoding Encoding copy
+  Encoding 128 /ubreve put
+  Encoding 129 /gcircumflex put
   currentdict
 end
 /Futura-ISOLatin1 exch definefont pop
@@ -365,6 +406,7 @@ end
 } def
 
 .5 inch 10.75 inch translate
+/monthsize 11 def
 
 %title
 gsave
@@ -495,6 +537,7 @@ gsave %titles
  currentpoint translate
  90 rotate
  0 0 moveto
+ leading
  (jar\047) centershow
  grestore
  /col 2 def
@@ -504,6 +547,7 @@ gsave %titles
  /col 8 def
  /row 22 def
  movetocell
+ leading
  (jarcolor\047) centershow
  /col .75 def
  /row 27 def
@@ -512,23 +556,25 @@ gsave %titles
  currentpoint translate
  90 rotate
  0 0 moveto
+ leading
  (monat\047) centershow
  grestore
  /col 8 def
  /row 31 def
  movetocell
+ leading
  (1\252 semajntag\047) centershow
  /col 6 def
  /row 33 def
  movetocell
  6 stdfont
- /smallprint (dezajno de Marc Moskowitz, algoritmo kaj arango desegnita de KT) def
+ /smallprint (dezajno de Marc Moskowitz, algoritmo kaj aran\201o desegnita de KT) def
  smallprint centershow
- movetocell
- smallprint stringwidth pop 2 div 0 rmoveto
- (go desegnita de KT) stringwidth pop -1 mul 0 rmoveto
- leading
- (\223) show
+% movetocell
+% smallprint stringwidth pop 2 div 0 rmoveto
+% (go desegnita de KT) stringwidth pop -1 mul 0 rmoveto
+% leading
+% (\223) show
  
 grestore
 
@@ -553,7 +599,6 @@ gsave
 grestore
 
 %months
-/monthsize 11 def
 gsave
  /col 4.5 def
  /row 24 def
@@ -589,14 +634,7 @@ gsave
   .75 setgray
   spot
  grestore
- (feb aug ) monthshow
- gsave
- movetocell
- monthsize stdfont
- (ug ) stringwidth pop -1 mul 0 rmoveto
- leading
- (\226) show
- grestore
+ (feb a\200g ) monthshow
  newrow
  movetocell
  (maj ) monthshow
