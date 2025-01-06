@@ -148,7 +148,7 @@
     7 setlinewidth
     newpath
     -12.5 -12.5 25 45 405 arc
-    37.5 dup lineto
+    37.5 dup rlineto
     -25 0 rmoveto
     25 0 rlineto
     0 -25 rlineto
@@ -160,14 +160,12 @@
     gsave
     currentpoint translate
     symbolscale
-    0 3.125 translate
     1 5 div dup scale
     7 setlinewidth
     newpath
-    -13 12 20 180 -45 arcn
-    -37.5 dup rlineto
-    100 0 rlineto
-    -37.5 -25 rmoveto
+    -50 0 25 2 sqrt mul 60 -60 arcn
+    66.6 0 rlineto
+    -25 -25 rmoveto
     0 100 rlineto
     stroke
     grestore    
