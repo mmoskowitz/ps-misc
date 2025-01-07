@@ -406,11 +406,22 @@ end
 .5 inch 10.75 inch translate
 /monthsize 11 def
 
+%cutline
+gsave
+.75 setgray
+0 0 moveto
+gridside 11 mul 0 rmoveto
+.5 inch -10.75 inch rmoveto
+4 0 rmoveto
+0 12 inch rlineto
+stroke
+grestore
+
 %title
 gsave
 0 gridside -2 mul translate
 24 stdfont
-gridside 7 5 add mul  2 div 0 moveto
+gridside 7 5 add 1 sub mul 2 div 0 moveto
 (dumiljara kalendar\047) centershow
 
 grestore
