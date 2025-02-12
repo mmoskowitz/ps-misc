@@ -403,122 +403,118 @@ end
     gridside col mul gridside row -1 mul mul moveto
 } def
 
-.5 inch 10.75 inch translate
 /monthsize 11 def
 
-%cutline
-gsave
-.75 setgray
-0 0 moveto
-gridside 11 mul 0 rmoveto
-.5 inch -10.75 inch rmoveto
-4 0 rmoveto
-0 12 inch rlineto
-%stroke
-grestore
+/drawtitle {
+    %title
+    gsave
+    0 gridside -2 mul translate
+    24 stdfont
+    gridside 7 5 add 1 sub mul 2 div 0 moveto
+    (dumiljara kalendar\047) centershow
+    
+    grestore
+} def
 
-%title
-gsave
-0 gridside -2 mul translate
-24 stdfont
-gridside 7 5 add 1 sub mul 2 div 0 moveto
-(dumiljara kalendar\047) centershow
+/drawyears {
+    %years
+    gsave
+    gridside 5 mul 0 translate
+    gsave
+    gridside -0.5 mul dup -1 mul translate
+    .5 setlinewidth
+    newpath
+    resetcell
+    0 {
+	movetocell
+	/col col 1 add def
+	0 gridside -22 mul rlineto
+    } repeat
+    stroke
+    grestore
+    
+    resetcell
+    0 1 99 {
+	/year exch def
+	movetocell
+	12 stdfont
+	year 4 mod 0 eq {
+	    year 0 eq {
+		gsave
+		.75 setgray
+		newpath
+		0 0 spotrad -135 45 arc
+		fill
+		0 setgray
+		newpath
+		0 0 spotrad 0 360 arc
+		stroke
+		grestore
+		year numshow
+	    } {
+		year numboldshow
+	    } ifelse
+	} {
+	    year numshow
+	} ifelse
+	year 4 mod 3 eq {
+	    nextcell
+	} if
+	nextcell
+    } for
+    grestore
+} def
 
-grestore
+/drawcenturies {
+    %centuries
+    gsave
+    /col 0 def
+    
+    /row 18 def
+    movetocell
+    currentpoint translate
+    gsave
+    gridside -0.5 mul dup -1 mul translate
+    .5 setlinewidth
+    newpath
+    resetcell
+    0 {
+	movetocell
+	/row row 1 add def
+	gridside 10 mul 0 rlineto
+    } repeat
+    stroke
+    grestore
+    resetcell
+    16 1 35 {
+	/century exch def
+	movetocell
+	12 stdfont
+	century 4 mod 0 eq {
+	    gsave
+	    currentpoint translate
+	    .75 setgray
+	    newpath
+	    0 0 spotrad -135 45 arcn
+	    fill
+	    0 setgray
+	    newpath
+	    0 0 spotrad 0 360 arc
+	    stroke
+            grestore
+	    century numshow
+	} {
+	    century numshow
+	} ifelse
+	nextrow
+	
+    } for
+    
+    drawyearcolors
+    grestore
+} def
 
-0 gridside -3 mul translate
-
-%years
-gsave
- gridside 5 mul 0 translate
- gsave
-  gridside -0.5 mul dup -1 mul translate
-  .5 setlinewidth
-  newpath
-  resetcell
-  0 {
-      movetocell
-      /col col 1 add def
-      0 gridside -22 mul rlineto
-  } repeat
-  stroke
- grestore
-
- resetcell
- 0 1 99 {
-     /year exch def
-     movetocell
-     12 stdfont
-     year 4 mod 0 eq {
-	 year 0 eq {
-	     gsave
-	      .75 setgray
-	      newpath
-	      0 0 spotrad -135 45 arc
-	      fill
-	      0 setgray
-	      newpath
-	      0 0 spotrad 0 360 arc
-	      stroke
-	     grestore
-	     year numshow
-	 } {
-	     year numboldshow
-	 } ifelse
-     } {
-	 year numshow
-     } ifelse
-     year 4 mod 3 eq {
-	 nextcell
-     } if
-     nextcell
- } for
-grestore
-
-
-%centuries
-gsave
-/col 0 def
-
- /row 18 def
- movetocell
- currentpoint translate
- gsave
-  gridside -0.5 mul dup -1 mul translate
-  .5 setlinewidth
-  newpath
-  resetcell
-  0 {
-      movetocell
-      /row row 1 add def
-      gridside 10 mul 0 rlineto
-  } repeat
-  stroke
-  grestore
- resetcell
- 16 1 35 {
-     /century exch def
-     movetocell
-     12 stdfont
-     century 4 mod 0 eq {
-	 gsave
-	 currentpoint translate
-	  .75 setgray
-	  newpath
-	  0 0 spotrad -135 45 arcn
-	  fill
-	  0 setgray
-	  newpath
-	  0 0 spotrad 0 360 arc
-	  stroke
-         grestore
-	 century numshow
-     } {
-	 century numshow
-     } ifelse
-     nextrow
-     
- } for
+/drawyearcolors {
  %year type markers
  gsave
   movetocell
@@ -535,119 +531,152 @@ gsave
       /color color 5 add 7 mod def
   } for
  grestore
-grestore
+} def
 
-gsave %titles
- 12 stdfont
- /col 4 def
- /row 8 def
- movetocell
- gsave
- currentpoint translate
- 90 rotate
- 0 0 moveto
- leading
- (jar\047) centershow
- grestore
- /col 2 def
- /row 17 def
- movetocell
- (centjar\047) centershow
- /col 8 def
- /row 22 def
- movetocell
- leading
- (jarcolor\047) centershow
- /col .75 def
- /row 27 def
- movetocell
- gsave
- currentpoint translate
- 90 rotate
- 0 0 moveto
- leading
- (monat\047) centershow
- grestore
- /col 8 def
- /row 31 def
- movetocell
- leading
- (1\252 semajntag\047) centershow
- /col 6 def
- /row 33 def
- movetocell
- 6 stdfont
- /smallprint (dezajno de Marc Moskowitz, algoritmo kaj aran\201o desegnita de KT) def
- smallprint centershow
-% movetocell
-% smallprint stringwidth pop 2 div 0 rmoveto
-% (go desegnita de KT) stringwidth pop -1 mul 0 rmoveto
-% leading
-% (\223) show
- 
-grestore
+/drawtitles {
+    gsave %titles
+    12 stdfont
+    /col 4 def
+    /row 8 def
+    movetocell
+    gsave
+    currentpoint translate
+    90 rotate
+    0 0 moveto
+    leading
+    (jar\047) centershow
+    grestore
+    /col 2 def
+    /row 17 def
+    movetocell
+    (centjar\047) centershow
+    /col 8 def
+    /row 22 def
+    movetocell
+    leading
+    (jarkolor\047) centershow
+    /col .75 def
+    /row 27 def
+    movetocell
+    gsave
+    currentpoint translate
+    90 rotate
+    0 0 moveto
+    leading
+    (monat\047) centershow
+    grestore
+    /col 8 def
+    /row 31 def
+    movetocell
+    leading
+    (1\252 semajntag\047) centershow
+    /col 6 def
+    /row 33 def
+    movetocell
+    6 stdfont
+    /smallprint (dezajno de Marc Moskowitz, algoritmo kaj aran\201o desegnita de KT) def
+    smallprint centershow
+    % movetocell
+    % smallprint stringwidth pop 2 div 0 rmoveto
+    % (go desegnita de KT) stringwidth pop -1 mul 0 rmoveto
+    % leading
+    % (\223) show
+    
+    grestore
+} def
 
-%days
+/drawdays {
+    %days
+    gsave
+    /col 5 def
+    /row 23 def
+    movetocell
+    currentpoint translate
+    resetcell
+    0 1 6 {
+	movetocell
+	dot
+	nextcell
+    } for
+    0 1 48 {
+	/day exch def
+	movetocell
+	day row sub 8 add 7 mod symbol
+	nextcell
+    } for
+    grestore
+} def
+
+/drawmonths {
+    %months
+    gsave
+    /col 4.5 def
+    /row 24 def
+    movetocell
+    currentpoint translate
+    resetcell
+    (jan okt ) monthshow
+    newrow
+    movetocell
+    gsave
+    monthsize stdfont
+    (jan apr jul ) stringwidth pop -1 mul 0 rmoveto
+    (jan) stringwidth pop 2 div 0 rmoveto
+    .75 setgray
+    spot
+    grestore
+    (jan apr jul ) monthshow
+    newrow
+    movetocell
+    (sep dec ) monthshow
+    newrow
+    movetocell
+    (jun ) monthshow
+    newrow
+    movetocell
+    (feb mar nov ) monthshow
+    newrow
+    movetocell
+    gsave
+    monthsize stdfont
+    (feb aug ) stringwidth pop -1 mul 0 rmoveto
+    (feb) stringwidth pop 2 div 0 rmoveto
+    .75 setgray
+    spot
+    grestore
+    (feb a\200g ) monthshow
+    newrow
+    movetocell
+    (maj ) monthshow
+    newrow
+    grestore
+} def
+
+.5 inch 10.75 inch translate
+
+%cutline
 gsave
- /col 5 def
- /row 23 def
- movetocell
- currentpoint translate
- resetcell
- 0 1 6 {
-     movetocell
-     dot
-     nextcell
- } for
- 0 1 48 {
-     /day exch def
-     movetocell
-     day row sub 8 add 7 mod symbol
-     nextcell
- } for
+.75 setgray
+0 0 moveto
+gridside 11 mul 0 rmoveto
+.5 inch -10.75 inch rmoveto
+4 0 rmoveto
+0 12 inch rlineto
+%stroke
 grestore
 
-%months
-gsave
- /col 4.5 def
- /row 24 def
- movetocell
- currentpoint translate
- resetcell
- (jan okt ) monthshow
- newrow
- movetocell
- gsave
-  monthsize stdfont
-  (jan apr jul ) stringwidth pop -1 mul 0 rmoveto
-  (jan) stringwidth pop 2 div 0 rmoveto
-  .75 setgray
-  spot
- grestore
- (jan apr jul ) monthshow
- newrow
- movetocell
- (sep dec ) monthshow
- newrow
- movetocell
- (jun ) monthshow
- newrow
- movetocell
- (feb mar nov ) monthshow
- newrow
- movetocell
- gsave
-  monthsize stdfont
-  (feb aug ) stringwidth pop -1 mul 0 rmoveto
-  (feb) stringwidth pop 2 div 0 rmoveto
-  .75 setgray
-  spot
- grestore
- (feb a\200g ) monthshow
- newrow
- movetocell
- (maj ) monthshow
- newrow
-grestore
+drawtitle
+
+0 gridside -3 mul translate
+
+drawyears
+
+drawcenturies
+
+drawtitles
+
+drawdays
+
+drawmonths
 
 showpage
