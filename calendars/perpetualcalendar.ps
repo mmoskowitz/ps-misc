@@ -1,4 +1,13 @@
-%!
+%!PS-Adobe-2.0
+ %%Creator: Marc Moskowitz
+ %%Title: perpetualcalendar.ps
+ %%Pages: 1
+ %%PageOrder: Ascend
+ %%BoundingBox: 0 0 612 936
+ %%DocumentPaperSizes: Legal
+ %%EndComments
+
+%%BeginProlog
 
 /inch {72 mul} def
 
@@ -191,31 +200,31 @@
 } def
 
 /colors [
-    {cyan}
-    {violet}
-    {magenta}
     {red}
     {yellow}
     {green2}
+    {cyan}
+    {violet}
+    {magenta}
     {white}
 ] def
 
 /colornames [
-    (cej)
-    (blu)
-    (ma\201)
     (ru\201)
     (fla)
     (ver)
+    (cej)
+    (blu)
+    (ma\201)
     (bla)
 ] def
 
 /colornamegrays [
     1
-    1
-    1
-    1
     0
+    1
+    1
+    1
     1
     0
 ] def
@@ -355,6 +364,16 @@ dup length dict begin
   ISOLatin1Encoding Encoding copy
   Encoding 128 /ubreve put
   Encoding 129 /gcircumflex put
+  Encoding 130 /ccircumflex put
+  Encoding 131 /hcircumflex put
+  Encoding 132 /jcircumflex put
+  Encoding 133 /scircumflex put
+  Encoding 136 /Ubreve put
+  Encoding 137 /Gcircumflex put
+  Encoding 138 /Ccircumflex put
+  Encoding 139 /Hcircumflex put
+  Encoding 140 /Jcircumflex put
+  Encoding 141 /Scircumflex put
   currentdict
 end
 /Futura-ISOLatin1 exch definefont pop
@@ -652,7 +671,98 @@ end
     grestore
 } def
 
-.5 inch 10.75 inch translate
+/drawguide {
+    %instructions
+    gsave
+    12 stdfont
+    /col 12 def
+    /row 0 def
+    movetocell
+    currentpoint translate 
+    resetcell
+    /col 3 def
+    movetocell
+    (instrukcioj) centershow
+    %newrow
+    newrow movetocell
+    11 stdfont
+    (\202i tio estas kalendaro \202ar) show
+    newrow movetocell
+    (monstras la semajntagon de ) show
+    newrow movetocell
+    (la unua tago de la monato, ) show
+    newrow movetocell
+    (ke estis la "kalendo" en ) show
+    newrow movetocell
+    (antikva romo.) show
+    newrow newrow movetocell
+    (dividu la jarnumeron per ) show
+    newrow movetocell
+    (cento por lerni la jarcenton. ) show
+    newrow movetocell
+    (la resto estas la jaro. sub la ) show
+    newrow movetocell
+    (jaro kaj dekstre de la ) show
+    newrow movetocell
+    (jarcento trovu la jarkoloron. ) show
+    newrow movetocell
+    (se la jaro kaj la jarcento ) show
+    newrow movetocell
+    (faras grizan cirklon, la dato ) show
+    newrow movetocell
+    (estas de superjaro. trovu la ) show
+    newrow movetocell
+    (monaton; en superjaroj, uzu ) show
+    newrow movetocell
+    (la februaron a\200 la januaron ) show
+    newrow movetocell
+    (en la griza cirklo. sub la ) show
+    newrow movetocell
+    (jarkoloro kaj dekstre de la ) show
+    newrow movetocell
+    (monato, trovu la simbolon ) show
+    newrow movetocell
+    (de la unua semajntago de la ) show
+    newrow movetocell
+    (monato. la simboloj de la ) show
+    newrow movetocell
+    (semajntagoj estas:) show
+    /row row .5 add def
+    newrow nextcell movetocell
+    1 symbol gridside 2 mul 3 div gridside -1 mul 5 div rmoveto (lundo) show
+    newrow nextcell movetocell
+    2 symbol gridside 2 mul 3 div gridside -1 mul 5 div rmoveto (mardo) show
+    newrow nextcell movetocell
+    3 symbol gridside 2 mul 3 div gridside -1 mul 5 div rmoveto (merkredo) show
+    newrow nextcell movetocell
+    4 symbol gridside 2 mul 3 div gridside -1 mul 5 div rmoveto (\204a\200do) show
+    newrow nextcell movetocell
+    5 symbol gridside 2 mul 3 div gridside -1 mul 5 div rmoveto (vendredo) show
+    newrow nextcell movetocell
+    6 symbol gridside 2 mul 3 div gridside -1 mul 5 div rmoveto (sabato) show
+    newrow nextcell movetocell
+    0 symbol gridside 2 mul 3 div gridside -1 mul 5 div rmoveto (diman\202o) show
+    newrow nextcell movetocell
+    grestore
+} def
+
+%%EndProlog
+%%Page: calendar-0
+
+.5 inch 13.5 inch translate
+
+%temp border
+newpath
+0 0 moveto
+7.5 inch 0 rlineto
+0 -13 inch rlineto
+-7.5 inch 0 rlineto
+closepath
+%stroke
+
+%set page origin
+gridside 1.5 mul 0 translate
+14 11 div dup scale
 
 %cutline
 gsave
@@ -678,5 +788,7 @@ drawtitles
 drawdays
 
 drawmonths
+
+drawguide
 
 showpage
