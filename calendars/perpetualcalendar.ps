@@ -157,7 +157,7 @@
     7 setlinewidth
     newpath
     -12.5 -12.5 25 45 405 arc
-    37.5 dup rlineto
+    30 dup rlineto
     -25 0 rmoveto
     25 0 rlineto
     0 -25 rlineto
@@ -353,39 +353,55 @@
 
 %re-encode fonts:begin
 
-/Futura-Medium findfont 
-dup length dict begin
-  { 1 index /FID ne
+/addesperantoglyphs {
+    /to exch def
+    /from exch def
+    from findfont 
+    dup length dict begin
+    { 1 index /FID ne
       {def}
       {pop pop}
-    ifelse
-  } forall
-  /Encoding ISOLatin1Encoding length array def
-  ISOLatin1Encoding Encoding copy
-  Encoding 128 /ubreve put
-  Encoding 129 /gcircumflex put
-  Encoding 130 /ccircumflex put
-  Encoding 131 /hcircumflex put
-  Encoding 132 /jcircumflex put
-  Encoding 133 /scircumflex put
-  Encoding 136 /Ubreve put
-  Encoding 137 /Gcircumflex put
-  Encoding 138 /Ccircumflex put
-  Encoding 139 /Hcircumflex put
-  Encoding 140 /Jcircumflex put
-  Encoding 141 /Scircumflex put
-  currentdict
-end
-/Futura-ISOLatin1 exch definefont pop
+      ifelse
+    } forall
+    /Encoding ISOLatin1Encoding length array def
+    ISOLatin1Encoding Encoding copy
+    Encoding 128 /ubreve put
+    Encoding 129 /gcircumflex put
+    Encoding 130 /ccircumflex put
+    Encoding 131 /hcircumflex put
+    Encoding 132 /jcircumflex put
+    Encoding 133 /scircumflex put
+    Encoding 136 /Ubreve put
+    Encoding 137 /Gcircumflex put
+    Encoding 138 /Ccircumflex put
+    Encoding 139 /Hcircumflex put
+    Encoding 140 /Jcircumflex put
+    Encoding 141 /Scircumflex put
+    currentdict
+    end
+    to exch definefont pop
+} def
 
-/Font-Standard /Futura-Medium def
+/Helvetica-Bold /Helvetica-Bold-EO addesperantoglyphs
+/Helvetica-Medium /Helvetica-Medium-EO addesperantoglyphs
+/Futura-Bold /Futura-Bold-EO addesperantoglyphs
+/Futura-Medium /Futura-Medium-EO addesperantoglyphs
+/AvantGarde-Demi /AvantGarde-Demi-EO addesperantoglyphs
+/AvantGarde-Book /AvantGarde-Book-EO addesperantoglyphs
+
+/Font-Standard /Helvetica-Bold def
 %re-encode fonts:end
 
 
 
 /stdfont {
     /size exch def
-    /Futura-ISOLatin1  findfont size scalefont setfont
+    /AvantGarde-Demi-EO  findfont size scalefont setfont
+} def
+
+/textfont {
+    /size exch def
+    /AvantGarde-Book-EO  findfont size scalefont setfont
 } def
 
 /boldfont {
@@ -395,6 +411,11 @@ end
 
 /newrow {
     /row row 1 add def
+    /col 0 def
+} def
+
+/newtrow {
+    /row row 2 3 div add def
     /col 0 def
 } def
 
@@ -430,7 +451,7 @@ end
     0 gridside -2 mul translate
     24 stdfont
     gridside 7 5 add 1 sub mul 2 div 0 moveto
-    (dumiljara kalendar\047) centershow
+    (dumiljara kalendaro) centershow
     
     grestore
 } def
@@ -554,7 +575,7 @@ end
 
 /drawtitles {
     gsave %titles
-    12 stdfont
+    14 stdfont
     /col 4 def
     /row 8 def
     movetocell
@@ -563,17 +584,17 @@ end
     90 rotate
     0 0 moveto
     leading
-    (jar\047) centershow
+    (jaro) centershow
     grestore
     /col 2 def
     /row 17 def
     movetocell
-    (jarcent\047) centershow
+    (jarcento) centershow
     /col 8 def
     /row 22 def
     movetocell
     leading
-    (jarkolor\047) centershow
+    (jarkoloro) centershow
     /col .75 def
     /row 27 def
     movetocell
@@ -582,13 +603,13 @@ end
     90 rotate
     0 0 moveto
     leading
-    (monat\047) centershow
+    (monato) centershow
     grestore
     /col 8 def
     /row 31 def
     movetocell
     leading
-    (1\252 semajntag\047) centershow
+    (1\252 semajntago) centershow
     /col 6 def
     /row 33 def
     movetocell
@@ -674,7 +695,7 @@ end
 /drawguide {
     %instructions
     gsave
-    12 stdfont
+    14 stdfont
     /col 12 def
     /row 0 def
     movetocell
@@ -685,47 +706,47 @@ end
     (instrukcioj) centershow
     %newrow
     newrow movetocell
-    11 stdfont
+    10 textfont
     (\202i tio estas kalendaro \202ar) show
-    newrow movetocell
+    newtrow movetocell
     (monstras la semajntagon de ) show
-    newrow movetocell
+    newtrow movetocell
     (la unua tago de la monato, ) show
-    newrow movetocell
-    (ke estis la "kalendo" en ) show
-    newrow movetocell
+    newtrow movetocell
+    (ke estis la \253kalendo\273 en ) show
+    newtrow movetocell
     (antikva romo.) show
-    newrow newrow movetocell
+    newtrow newtrow movetocell
     (dividu la jarnumeron per ) show
-    newrow movetocell
+    newtrow movetocell
     (cento por lerni la jarcenton. ) show
-    newrow movetocell
+    newtrow movetocell
     (la resto estas la jaro. sub la ) show
-    newrow movetocell
+    newtrow movetocell
     (jaro kaj dekstre de la ) show
-    newrow movetocell
+    newtrow movetocell
     (jarcento trovu la jarkoloron. ) show
-    newrow movetocell
+    newtrow movetocell
     (se la jaro kaj la jarcento ) show
-    newrow movetocell
+    newtrow movetocell
     (faras grizan cirklon, la dato ) show
-    newrow movetocell
+    newtrow movetocell
     (estas de superjaro. trovu la ) show
-    newrow movetocell
+    newtrow movetocell
     (monaton; en superjaroj, uzu ) show
-    newrow movetocell
+    newtrow movetocell
     (la februaron a\200 la januaron ) show
-    newrow movetocell
+    newtrow movetocell
     (en la griza cirklo. sub la ) show
-    newrow movetocell
+    newtrow movetocell
     (jarkoloro kaj dekstre de la ) show
-    newrow movetocell
+    newtrow movetocell
     (monato, trovu la simbolon ) show
-    newrow movetocell
+    newtrow movetocell
     (de la unua semajntago de la ) show
-    newrow movetocell
+    newtrow movetocell
     (monato. la simboloj de la ) show
-    newrow movetocell
+    newtrow movetocell
     (semajntagoj estas:) show
     /row row .5 add def
     newrow nextcell movetocell
@@ -766,11 +787,11 @@ gridside 1.5 mul 0 translate
 
 %cutline
 gsave
-.75 setgray
+newpath
 0 0 moveto
-gridside 11 mul 0 rmoveto
+gridside 9.75 mul 0 rmoveto
 .5 inch -10.75 inch rmoveto
-4 0 rmoveto
+4 -2 inch rmoveto
 0 12 inch rlineto
 %stroke
 grestore
