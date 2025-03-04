@@ -1,6 +1,6 @@
-instrukcioj
-
 ĉi tio estas kalendaro ĉar monstras la semajntagon de la unua tago de la monato, ke estis la «kalendo» en antikva romo.
+
+instrukcioj
 
 dividu la jarnumeron per cento por lerni la jarcenton.
 la resto estas la jaro.
