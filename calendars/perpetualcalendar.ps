@@ -274,16 +274,16 @@
     tsdata 0 eq {
 	(0)
     } {
-	tsdata cvi tsdata ne
+	tsdata cvi tsdata ne %tsdata not an int
 	tsdata 4 mul tsdata 4 mul cvi eq and { %1/4, 1/2, 3/4
-	    /tsrem tsdata 4 mul cvi 4 mod def
-	    /tsival tsdata cvi tostring def
-	    /ts4val tsival length 1 add string def
-	    ts4val 0 tsival putinterval
-	    ts4val tsival length 187 tsrem add put
-	    ts4val
+	    /tsrem tsdata 4 mul cvi 4 mod def %remainder of 4
+	    /tsival tsdata cvi tostring def %call on int
+	    /ts4val tsival length 1 add string def %string for result
+	    ts4val 0 tsival putinterval %put the int in
+	    ts4val tsival length 187 tsrem add put %add tsrem+187 to string
+	    ts4val %return tsval
 	} {
-	    tsdata 1000 ge {
+	    tsdata 1000 ge { %tsdata over 1000
 		tsdata 1000 mod
 		tsdata 1000 div cvi
 		/tstop exch tostring def
@@ -304,9 +304,28 @@
 /padnumstring {
     /numstring exch def
     /pnsval 2 string def
-    pnsval 0 (00) putinterval
+    pnsval 0 (OO) putinterval
     pnsval 2 numstring length sub numstring putinterval
     pnsval
+} def
+
+/zeros2oscars { %string 
+    /zval exch def
+    /zlen zval length def
+    /zero (0) 0 get def
+    /oscar (O) 0 get def
+    /oval zlen string def
+    /oindex 0 def
+    zval {
+	/chr exch def
+	chr zero eq {
+	    oval oindex oscar put
+	} {
+	    oval oindex chr put
+	} ifelse
+	/oindex oindex 1 add def
+    } forall
+    oval
 } def
 
 /leading {
@@ -326,7 +345,9 @@
 /numshow {
     gsave
       4 argleading
-      tostring padnumstring centershow
+      tostring padnumstring
+      zeros2oscars
+      centershow
     grestore
 } def
 
@@ -595,7 +616,7 @@
     movetocell
     leading
     (jarkoloro) centershow
-    /col .75 def
+    /col .5 def
     /row 27 def
     movetocell
     gsave
