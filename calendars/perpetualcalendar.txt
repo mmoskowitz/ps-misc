@@ -1,0 +1,13 @@
+instrukcioj
+
+ĉi tio estas kalendaro ĉar monstras la semajntagon de la unua tago de la monato, ke estis la «kalendo» en antikva romo.
+
+dividu la jarnumeron per cento por lerni la jarcenton. la resto estas la jaro. sub la jaro kaj dekstre de la jarcento trovu la jarkoloron. se la jaro kaj la jarcento faras grizan cirklon, la dato estas de superjaro. trovu la monaton; en superjaroj, uzu la februaron aŭ la januaron en la griza cirklo. sub la jarkoloro kaj dekstre de la monato, trovu la simbolon de la unua semajntago de la monato. la simboloj de la semajntagoj estas:
+
+lundo
+mardo
+merkredo
+ĵaŭdo
+vendredo
+sabato
+dimanĉo
