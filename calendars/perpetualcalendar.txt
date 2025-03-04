@@ -1,4 +1,5 @@
-ĉi tio estas kalendaro ĉar monstras la semajntagon de la unua tago de la monato, ke estis la «kalendo» en antikva romo.
+
+ĉi tio estas kalendaro, ĉar ĝi montras la semajntagon de la unua tago de la monato, kio estis la «kalendo» en antikva romo.
 
 instrukcioj
 
@@ -7,8 +8,8 @@ la resto estas la jaro.
 sub la jaro kaj dekstre de la jarcento trovu la jarkoloron.
 se la jaro kaj la jarcento faras grizan cirklon, la dato estas de superjaro.
 trovu la monaton;
-en superjaroj, uzu la februaron aŭ la januaron en la griza cirklo.
-sub la jarkoloro kaj dekstre de la monato, trovu la simbolon de la unua semajntago de la monato.
+en superjaroj uzu la februaron aŭ la januaron en la griza cirklo.
+sub la jarkoloro kaj dekstre de la monato trovu la simbolon de la unua semajntago de la monato.
 
 la simboloj de la semajntagoj estas:
 
