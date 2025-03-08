@@ -372,6 +372,7 @@
 
 /nshow {
     /nstring exch def
+    /nzstring nstring zeros2oscars def
     {
 	/c1 exch def
 	/c0 exch def
@@ -379,7 +380,7 @@
 	%stroke width
 	/ell (l) stringwidth pop def
 	ell nm mul -1 mul 0 rmoveto
-    } nstring kshow
+    } nzstring kshow
 } def
 
 /leading {
@@ -530,6 +531,11 @@
 
 /movetocell {
     gridside col mul gridside row -1 mul mul moveto
+} def
+
+/tnl {
+ nshow
+ newtrow movetocell
 } def
 
 /monthsize 11 def
@@ -784,60 +790,46 @@
 /drawguide {
     %instructions
     gsave
-    14 stdfont
     /col 12 def
     /row 0 def
     movetocell
     currentpoint translate 
     resetcell
-    /col 3 def
-    movetocell
-    (instrukcioj) centertshow
-    %newrow
-    newrow movetocell
     10 textfont
-    (\202i tio estas kalendaro \202ar) show
-    newtrow movetocell
-    (monstras la semajntagon de ) show
-    newtrow movetocell
-    (la unua tago de la monato, ) show
-    newtrow movetocell
-    (ke estis la \253kalendo\273 en ) show
-    newtrow movetocell
-    (antikva romo.) show
-    newtrow newtrow movetocell
-    (dividu la jarnumeron per ) show
-    newtrow movetocell
-    (cento por lerni la jarcenton. ) show
-    newtrow movetocell
-    (la resto estas la jaro. sub la ) show
-    newtrow movetocell
-    (jaro kaj dekstre de la ) show
-    newtrow movetocell
-    (jarcento trovu la jarkoloron. ) show
-    newtrow movetocell
-    (se la jaro kaj la jarcento ) show
-    newtrow movetocell
-    (faras grizan cirklon, la dato ) show
-    newtrow movetocell
-    (estas de superjaro. trovu la ) show
-    newtrow movetocell
-    (monaton; en superjaroj, uzu ) show
-    newtrow movetocell
-    (la februaron a\200 la januaron ) show
-    newtrow movetocell
-    (en la griza cirklo. sub la ) show
-    newtrow movetocell
-    (jarkoloro kaj dekstre de la ) show
-    newtrow movetocell
-    (monato, trovu la simbolon ) show
-    newtrow movetocell
-    (de la unua semajntago de la ) show
-    newtrow movetocell
-    (monato. la simboloj de la ) show
-    newtrow movetocell
-    (semajntagoj estas:) show
+    (\202i tiu kalendaro estas vere ) tnl
+    (kalend-ar-o. \253kalendo\273 estis ) tnl
+    (en Romio la esprimo por la unua ) tnl
+    (tago de monato; kaj \202i tiu ) tnl
+    (kalendaro montras la ) tnl
+    (semajntagon de la unua tago de ) tnl
+    (\202iu monato de la jaroj 1600 \201is ) tnl
+    (3599, do la semajntagon de \202iu ) tnl
+    (kalendo en tiu periodo.) tnl
+
+    /col 3 def
     /row row .5 add def
+    movetocell
+    14 stdfont
+    (instrukcioj) centertshow
+    newrow movetocell
+
+    10 textfont
+    (disfendu la jarnumeron en la ) tnl
+    (jarcenton kaj la jaron. sub la ) tnl
+    (jaro kaj dekstre de la jarcento vi ) tnl
+    (trovu la jarkoloron. se la koloro ) tnl
+    (de la cirklo de la jaro estas griza, ) tnl
+    (a\200 la duoncirkloj de la jaro kaj la ) tnl
+    (jarcento estas grizaj, estas ) tnl
+    (superjaro. trovu la monaton; pri ) tnl
+    (superjaroj uzu la februaron a\200 la ) tnl
+    (januaron en la griza cirklo. sub la ) tnl
+    (jarkoloro kaj dekstre de la ) tnl
+    (monato trovu la simbolon de la ) tnl
+    (unua semajntago de la monato. ) tnl
+    (la simboloj estas:) tnl
+
+    /row row -.75 add def
     newrow nextcell movetocell
     1 symbol gridside 2 mul 3 div gridside -1 mul 5 div rmoveto (lundo) show
     newrow nextcell movetocell
@@ -852,7 +844,31 @@
     6 symbol gridside 2 mul 3 div gridside -1 mul 5 div rmoveto (sabato) show
     newrow nextcell movetocell
     0 symbol gridside 2 mul 3 div gridside -1 mul 5 div rmoveto (diman\202o) show
-    newrow nextcell movetocell
+
+    newtrow movetocell
+    newtrow movetocell
+
+
+    (ekzemple, se vi volus scii la ) tnl
+    (semajntago de la kvara tago de ) tnl
+    (februario de la jaro 1900, vi trovus ) tnl
+    (la jarkoloron sub la jaro 00 kaj ) tnl
+    (dekstre de la jarcento 19 kio estas ) tnl
+    (flava cirklo. la jaro 00 havas ) tnl
+    (duoncirklon grizan, sed la jarcento ) tnl
+    (19 ne havas cirklon grizon, do 1900 ) tnl
+    (ne estas superjaro. sub la flava ) tnl
+    (cirklo pri la jarkoloro kaj dekstre ) tnl
+    (de la monato februaro sen cirklo ) tnl
+    (griza vi trovus la simbolo de ) tnl
+    (Merkurio, do la unua tago de via ) tnl
+    (februaro estas merkredo. sed vi ) tnl
+    (volus la kvara tago de februaro ) tnl
+    (kaj havus la unua, la kalendo. do ) tnl
+    (vi adicius tri kaj vidus la kvara ) tnl
+    (tago de februaro esti sabato.) tnl
+
+
     grestore
 } def
 
@@ -898,6 +914,8 @@ drawtitles
 drawdays
 
 drawmonths
+
+0 gridside 2 mul translate
 
 drawguide
 
