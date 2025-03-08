@@ -345,6 +345,43 @@
     } tstring kshow
 } def
 
+
+/nmod { % c0 c1 nmod num = how many ells to move back between c0 and c1
+    /c1 exch def
+    /c0 exch def
+    %ascii values
+    /aO (O) 0 get def %oscar, not zero
+    /a1 (1) 0 get def
+    /a4 (4) 0 get def
+    /a6 (6) 0 get def
+    /a7 (7) 0 get def
+    c0 aO eq c1 aO eq and { %OO
+	2
+    } {
+	c0 a1 eq c1 a1 eq or { %*1 or 1*
+	    .5
+	}{
+	    c0 a7 eq c1 a4 eq c1 a6 eq or and { %74 or 76
+		2 5 div
+	    } {
+		0
+	    } ifelse
+	} ifelse
+    } ifelse
+} def
+
+/nshow {
+    /nstring exch def
+    {
+	/c1 exch def
+	/c0 exch def
+	/nm c0 c1 nmod def
+	%stroke width
+	/ell (l) stringwidth pop def
+	ell nm mul -1 mul 0 rmoveto
+    } nstring kshow
+} def
+
 /leading {
     0 gridside -5 div rmoveto
 } def
@@ -365,12 +402,20 @@
     text tshow    
 } def
 
+/centernshow {
+    /text exch def
+    text stringwidth pop -2 div 0 rmoveto
+    %get the adjustment and move forward half of it
+    text 0 get text 1 get nmod (l) stringwidth pop mul 2 div 0 rmoveto
+    text nshow    
+} def
+
 /numshow {
     gsave
       4 argleading
       tostring padnumstring
       zeros2oscars
-      centershow
+      centernshow
     grestore
 } def
 
