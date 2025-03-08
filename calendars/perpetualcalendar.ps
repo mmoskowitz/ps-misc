@@ -328,6 +328,23 @@
     oval
 } def
 
+/tshow {
+    /tstring exch def
+    {
+	/c1 exch def
+	/c0 exch def
+	c1 (a) 0 get eq c1 (c) 0 get eq or
+	c1 (e) 0 get eq c1 (g) 0 get eq or or
+	c1 (o) 0 get eq c1 (q) 0 get eq or or
+	c1 (s) 0 get eq
+	or
+	c0 (k) 0 get eq and
+	{
+	    (l) stringwidth pop -3 div 0 rmoveto
+	} if
+    } tstring kshow
+} def
+
 /leading {
     0 gridside -5 div rmoveto
 } def
@@ -340,6 +357,12 @@
     /text exch def
     text stringwidth pop -2 div 0 rmoveto
     text show
+} def
+
+/centertshow {
+    /text exch def
+    text stringwidth pop -2 div 0 rmoveto
+    text tshow    
 } def
 
 /numshow {
@@ -472,7 +495,7 @@
     0 gridside -2 mul translate
     24 stdfont
     gridside 7 5 add 1 sub mul 2 div 0 moveto
-    (dumiljara kalendaro) centershow
+    (dumiljara kalendaro) centertshow
     
     grestore
 } def
@@ -615,7 +638,7 @@
     /row 22 def
     movetocell
     leading
-    (jarkoloro) centershow
+    (jarkoloro) centertshow
     /col .5 def
     /row 27 def
     movetocell
@@ -724,7 +747,7 @@
     resetcell
     /col 3 def
     movetocell
-    (instrukcioj) centershow
+    (instrukcioj) centertshow
     %newrow
     newrow movetocell
     10 textfont
