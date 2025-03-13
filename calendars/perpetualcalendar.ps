@@ -534,9 +534,13 @@
 } def
 
 /tnl {
- nshow
- newtrow movetocell
+    nshow
+    nl
 } def
+
+/nl {
+    newtrow movetocell
+} def 
 
 /monthsize 11 def
 
@@ -796,6 +800,40 @@
     grestore
 } def
 
+/flowtext { %words margin flowtext -
+    /margin exch def
+    /words exch def
+    /lastword ( ) def
+    % How This Works
+    %  words is an array of strings
+    % which end in spaces if they are at word boundaries
+    %  margin is the x-coord of the line
+    % before which text must stop
+    %  so for each word:
+    words {
+	/word exch def
+	% get currentpoint x
+	/currentx currentpoint pop def
+	% add word's stringwidth x
+	/wordwidth word stringwidth pop def
+	/newx currentx wordwidth add def
+	% gt margin?
+	newx margin gt {
+	    % lastword doesn't end with space?
+	    lastword dup length 1 sub get ( ) 0 get ne {
+		% put in a hyphen
+		(-) nshow
+	    } if
+	    % new line
+	    nl
+	} if
+	% update lastword
+	/lastword word def
+	% show the word
+	word nshow
+    } forall
+} def
+
 /drawguide {
     %instructions
     gsave
@@ -805,15 +843,13 @@
     currentpoint translate 
     resetcell
     9 textfont
-    (\202i tiu kalendaro estas kalend-ar-o. ) tnl
-    (\253kalendo\273 estis en Romio la esprimo ) tnl
-    (por la unua tago de monato; kaj \202i ) tnl
-    (tiu kalendaro montras la semajn-) tnl
-    (tagon de la unua tago de \202iu ) tnl
-    (monato en la Gregoria kalendaro ) tnl
-    (de la jaroj 1600 \201is 3599, do la ) tnl
-    (semajntagon de \202iu kalendo en ) tnl
-    (tiu periodo.) tnl
+    [
+	(\202i )(tiu )(kalendaro )(estas )(kalend-ar-o. )
+	(\253kalendo\273 )(estis )(en )(Romio )(la )(esprimo )(por )(la )(unua )(tago )(de )(monato; )
+	(kaj )(\202i )(tiu )(kalendaro )(montras )(la )(semajn)(tagon )(de )(la )(unua )(tago )(de )(\202iu )(monato )(en )(la )(Gregoria )(kalendaro )(de )(la )(jaroj )(1600 )(\201is )(3599, )
+	(do )(la )(semajntagon )(de )(\202iu )(kalendo )(en )(tiu )(periodo. )
+    ] gridside 8.5 mul flowtext
+    nl
 
     /col 1 def
     /row row .5 add def
@@ -823,18 +859,21 @@
     newrow movetocell
 
     9 textfont
-    (disfendu la jarnumeron en la jar-) tnl
-    (centon kaj la jaron. sub la jaro kaj ) tnl
-    (dekstre de la jarcento vi trovu la jar-) tnl
-    (koloron. se la koloro de la cirklo de ) tnl
-    (la jaro estas griza, a\200 la duoncirkloj ) tnl
-    (de la jaro kaj la jarcento estas grizaj, ) tnl
-    (estas superjaro. trovu la monaton; pri ) tnl
-    (superjaroj uzu la februaron a\200 la ) tnl
-    (januaron en la griza cirklo. sub la jar-) tnl
-    (koloro kaj dekstre de la monato trovu ) tnl
-    (la simbolon de la unua semajntago ) tnl
-    (de la monato. la simboloj estas:) tnl
+    [
+	(disfendu )(la )(jarnumeron )(en )(la )(jar)(centon )(kaj )(la )(jaron. )
+	(sub )(la )(jaro )(kaj )(dekstre )(de )(la )(jar)(cento )
+	(vi )(trovu )(la )(jar)(koloron. )
+	(se )(la )(koloro )(de )(la )(cirklo )(de )(la )(jaro )(estas )(griza, )
+	(a\200 )(la )(duon)(cirkloj )(de )(la )(jaro )(kaj )(la )(jar)(cento )(estas )(grizaj, )
+	(estas )(super)(jaro. )
+	(trovu )(la )(monaton; )
+	(pri )(super)(jaroj )
+	(uzu )(la )(februaron )(a\200 )(la )(januaron )(en )(la )(griza )(cirklo. )
+	(sub )(la )(jar)(koloro )(kaj )(dekstre )(de )(la )(monato )
+	(trovu )(la )(simbolon )(de )(la )(unua )(semajn)(tago )(de )(la )(monato. )
+	(la )(simboloj )(estas:)
+    ] gridside 8.5 mul flowtext
+    nl
 
     /row row -.75 add def
     newrow nextcell movetocell
@@ -855,23 +894,24 @@
     newtrow movetocell
     newtrow movetocell
 
-
-    (ekzemple, se vi volus scii la semajn-) tnl
-    (tago de la kvara tago de februario ) tnl
-    (de la jaro 1900, vi trovus la jarkoloron ) tnl
-    (sub la jaro 00 kaj dekstre de la jar-) tnl
-    (cento 19 kio estas flava cirklo. la jaro ) tnl
-    (00 havas duoncirklon grizan, sed la ) tnl
-    (jarcento 19 ne havas cirklon grizon, ) tnl
-    (do 1900 ne estas superjaro. sub la ) tnl
-    (flava cirklo pri la jarkoloro kaj dekstre ) tnl
-    (de la monato februaro sen cirklo griza ) tnl
-    (vi trovus la simbolo de Merkurio, do ) tnl
-    (la unua tago de via februaro estas ) tnl
-    (merkredo. sed vi volus la kvara tago ) tnl
-    (de februaro kaj havus la unua, la ) tnl
-    (kalendo. do vi adicius tri kaj vidus ) tnl
-    (la kvara tago de februaro esti sabato.) tnl
+    [
+	(ekzemple, )
+	(se )(vi )(volus )(scii )(la )(semajn)(tago )(de )(la )(kvara )(tago )(de )(februario )(de )(la )(jaro )(1900, )
+	(vi )(trovus )(la )(jar)(koloron )(sub )(la )(jaro )(00 )(kaj )(dekstre )(de )(la )(jar)(cento )(19 )
+	(kio )(estas )(flava )(cirklo. )
+	(la )(jaro )(00 )(havas )(duon)(cirklon )(grizan, )
+	(sed )(la )(jar)(cento )(19 )(ne )(havas )(cirklon )(grizon, )
+	(do )(1900 )(ne )(estas )(super)(jaro. )
+	(sub )(la )(flava )(cirklo )(pri )(la )(jar)(koloro )
+	(kaj )(dekstre )(de )(la )(monato )(februaro )(sen )(cirklo )(griza )
+	(vi )(trovus )(la )(simbolo )(de )(Merkurio, )
+	(do )(la )(unua )(tago )(de )(via )(februaro )(estas )(merkredo. )
+	(sed )(vi )(volus )(la )(kvara )(tago )(de )(februaro )
+	(kaj )(havus )(la )(unua, )(la )(kalendo. )
+	(do )(vi )(adicius )(tri )
+	(kaj )(vidus )(la )(kvara )(tago )(de )(februaro )(esti )(sabato.)
+    ] gridside 8.5 mul flowtext
+    nl
 
 
     grestore
