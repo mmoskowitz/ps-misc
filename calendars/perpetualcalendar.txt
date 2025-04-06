@@ -1,6 +1,6 @@
 ĉi tiu kalendaro estas kalend-ar-o.
 «kalendo» estis en Romio la esprimo por la unua tago de monato;
-kaj ĉi tiu kalendaro montras la semajntagon de la unua tago de ĉiu monato de la jaroj 1600 ĝis 3599,
+kaj ĉi tiu kalendaro montras la semajntagon de la unua tago de ĉiu monato de la jaroj 16OO ĝis 3599 laŭ la Gregoria kalendaro,
 do la semajntagon de ĉiu kalendo en tiu periodo.
 
 instrukcioj

@@ -304,28 +304,9 @@
 /padnumstring {
     /numstring exch def
     /pnsval 2 string def
-    pnsval 0 (OO) putinterval
+    pnsval 0 (00) putinterval
     pnsval 2 numstring length sub numstring putinterval
     pnsval
-} def
-
-/zeros2oscars { %string 
-    /zval exch def
-    /zlen zval length def
-    /zero (0) 0 get def
-    /oscar (O) 0 get def
-    /oval zlen string def
-    /oindex 0 def
-    zval {
-	/chr exch def
-	chr zero eq {
-	    oval oindex oscar put
-	} {
-	    oval oindex chr put
-	} ifelse
-	/oindex oindex 1 add def
-    } forall
-    oval
 } def
 
 /tshow {
@@ -350,12 +331,12 @@
     /c1 exch def
     /c0 exch def
     %ascii values
-    /aO (O) 0 get def %oscar, not zero
+    /a0 (0) 0 get def 
     /a1 (1) 0 get def
     /a4 (4) 0 get def
     /a6 (6) 0 get def
     /a7 (7) 0 get def
-    c0 aO eq c1 aO eq and { %OO
+    c0 a0 eq c1 a0 eq and { %00
 	2
     } {
 	c0 a1 eq c1 a1 eq or { %*1 or 1*
@@ -372,7 +353,6 @@
 
 /nshow {
     /nstring exch def
-    /nzstring nstring zeros2oscars def
     {
 	/c1 exch def
 	/c0 exch def
@@ -380,7 +360,7 @@
 	%stroke width
 	/ell (l) stringwidth pop def
 	ell nm mul -1 mul 0 rmoveto
-    } nzstring kshow
+    } nstring kshow
 } def
 
 /leading {
@@ -415,7 +395,6 @@
     gsave
       4.5 argleading
       tostring padnumstring
-      zeros2oscars
       centernshow
     grestore
 } def
@@ -447,7 +426,7 @@
     /to exch def
     /from exch def
     from findfont 
-    dup length dict begin
+    dup length 2 add dict begin
     { 1 index /FID ne
       {def}
       {pop pop}
@@ -469,6 +448,11 @@
     Encoding 140 /Jcircumflex put
     Encoding 141 /Scircumflex put
     Encoding 127 /arrowright put
+    /oldCS CharStrings def
+    /newCS oldCS length dict def
+    oldCS {newCS 3 1 roll put} forall
+    newCS /zero oldCS /O get put
+    /CharStrings newCS def
     currentdict
     end
     to exch definefont pop
