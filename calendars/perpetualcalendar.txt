@@ -40,5 +40,5 @@ do la unua tago de tiu februaro estas ĵaŭdo.
 sed vi volus la kvaran tagon de februaro
 kaj havus la unuan tagon, la kalendon.
 do vi adicius tri
-kaj vidus
+kaj vidus,
 ke la kvara tago de tiu februaro estas dimanĉo.
