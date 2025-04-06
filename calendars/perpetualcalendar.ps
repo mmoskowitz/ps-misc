@@ -455,6 +455,7 @@
     } forall
     /Encoding ISOLatin1Encoding length array def
     ISOLatin1Encoding Encoding copy
+    Encoding 45 /hyphen put
     Encoding 128 /ubreve put
     Encoding 129 /gcircumflex put
     Encoding 130 /ccircumflex put
@@ -847,7 +848,7 @@
     [
 	(\202i )(tiu )(kalendaro )(estas )(kalend-ar-o. )
 	(\253kalendo\273 )(estis )(en )(Romio )(la )(esprimo )(por )(la )(unua )(tago )(de )(monato; )
-	(kaj )(\202i )(tiu )(kalendaro )(montras )(la )(semajn)(tagon )(de )(la )(unua )(tago )(de )(\202iu )(monato )(en )(la )(Gregoria )(kalendaro )(de )(la )(jaroj )(1600 )(\201is )(3599, )
+	(kaj )(\202i )(tiu )(kalendaro )(montras )(la )(semajn)(tagon )(de )(la )(unua )(tago )(de )(\202iu )(monato )(de )(la )(jaroj )(1600 )(\201is )(3599 )(la\200 )(la )(Gregoria )(kalendaro, )
 	(do )(la )(semajntagon )(de )(\202iu )(kalendo )(en )(tiu )(periodo. )
     ] gridside 8.5 mul flowtext
     nl
@@ -869,7 +870,7 @@
 (estas )(superjaro. )
 (trovu )(la )(monaton; )
 (pri )(superjaroj )(uzu )(la )(februaron )(a\200 )(la )(januaron )(en )(la )(griza )(cirklo. )
-(sub )(la )(jarkoloro )(kaj )(dekstre )(de )(la )(monato )(trovu )(la )(simbolon )(de )(la )(unua )(semajntago )(de )(la )(monato. )
+(sub )(la )(jar)(koloro )(kaj )(dekstre )(de )(la )(monato )(trovu )(la )(simbolon )(de )(la )(unua )(semajn)(tago )(de )(la )(monato. )
 (la )(simboloj )(estas:)
     ] gridside 8.5 mul flowtext
     nl
@@ -896,7 +897,7 @@
     [
 	(ekzemple, )
 	(se )(vi )(volus )(scii )(la )(semajn)(tagon )(de )(la )(kvara )(tago )(de )(februaro )(de )(la )(jaro )(1900, )
-	(vi )(trovus )(la )(jar)(koloron )(sub )(la )(jaro )(00 )(kaj )(dekstre )(de )(la )(jarcento )(19, )
+	(vi )(trovus )(la )(jar)(koloron )(sub )(la )(jaro )(00 )(kaj )(dekstre )(de )(la )(jar)(cento )(19, )
 	(kie )(estas )(flava )(cirklo. )
 	(do )(la )(jar)(koloro )(de )(1900 )(estas )(flavo. )
 	(la )(jaro )(00 )(havas )(duon)(cirklon )(grizan, )
@@ -908,7 +909,7 @@
     gsave
     currentpoint translate
     2 3 div dup scale
-    -5 5 moveto
+    -5 6.25 moveto
     jove
     grestore
     [
