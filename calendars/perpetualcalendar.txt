@@ -35,7 +35,7 @@ sed la jarcento 19 ne havas duoncirklon grizan,
 do 1900 ne estas superjaro.
 sub la flava cirklo pri la jarkoloro
 kaj dekstre de la mallongigo «feb» sen cirklo griza pri februaro
-vi trovus la simbolon de Jupitero (♃),
+vi trovus la simbolon de Jupitero «♃»,
 do la unua tago de tiu februaro estas ĵaŭdo.
 sed vi volus la kvaran tagon de februaro
 kaj havus la unuan tagon, la kalendon.
